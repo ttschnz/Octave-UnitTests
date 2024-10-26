@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run tests
-        uses: ttschnz/octave-action@v1
+        uses: ttschnz/Octave-UnitTests@v3
         with:
           directory: ./path/to/my/matlab/files/
           test_case: MyTestCases
