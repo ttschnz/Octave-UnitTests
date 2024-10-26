@@ -13,18 +13,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Run Octave Unit tests
         uses: ./ # run action.yml from the root of this repo
-        # env:
-        #   WORKDIR: ./test_cases
         with:
+          directory: ./test_cases
           test_case: MyTestCases
 
       - name: Run Failing Octave Unit tests
         id: should-fail
         continue-on-error: true
         uses: ./ # run action.yml from the root of this repo
-        # env:
-        #   WORKDIR: ./test_cases
         with:
+          directory: ./test_cases
           test_case: MyFailingTestCases
 
       - name: Map unwanted success of 2nd unit tests to error

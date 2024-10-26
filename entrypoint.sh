@@ -1,8 +1,12 @@
 #!/bin/sh -l
 
 class_name=$1
+directory=$2
+cd $directory
+
 output=$(octave --path "/octave-modules" --eval "matlab.unittest.run_tests('$class_name')" 2>&1)
-echo -e "Octave output:\n$output"
+
+echo "Octave output:\n$output"
 
 string_to_check="ans = 1"
 # Check if the string was found
