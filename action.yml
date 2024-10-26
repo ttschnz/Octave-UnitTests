@@ -9,12 +9,17 @@ inputs:
     description: the directory where the test classes are defined in
     required: false
     default: .
+  packages:
+    description: additional octave package-urls to install, separated by new lines
+    required: false
+    default: ""
 runs:
   using: docker
   image: Dockerfile
   args:
     - ${{ inputs.test_case }}
     - ${{ inputs.directory }}
+    - ${{ inputs.packages }}
 branding:
   icon: code
   color: orange

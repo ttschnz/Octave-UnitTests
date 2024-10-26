@@ -25,5 +25,9 @@ jobs:
         with:
           directory: ./path/to/my/matlab/files/
           test_case: MyTestCases
+          packages: |
+            https://github.com/gnu-octave/statistics/archive/refs/tags/release-1.7.0.tar.gz
+            https://downloads.sourceforge.net/project/octave/Octave%20Forge%20Packages/Individual%20Package%20Releases/struct-1.0.18.tar.gz
+            https://downloads.sourceforge.net/project/octave/Octave%20Forge%20Packages/Individual%20Package%20Releases/optim-1.6.2.tar.gz
 
 ```
