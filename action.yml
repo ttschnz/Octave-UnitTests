@@ -1,21 +1,15 @@
 # action.yml
-name: 'Setup-Octave'
-description: Action for setting up Octave in a docker container
+name: Octave-UnitTests
+description: Action for using Octave for testing Matlab unit tests
 inputs:
-  command:
-    description: Octave command for executing in GH runner
+  test_case:
+    description: the name of the test class
     required: true
-    default: disp('Supply any Octave command for executing')
-  string_to_check:
-    description: String to find in output of octave. If it matches, the action has failed
-    required: false
-    default: Error
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args: # Command to be passed to the Docker container
-    - ${{ inputs.command }}
-    - ${{ inputs.string_to_check }}
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.test_case }}
 branding:
-  icon: 'code'
-  color: 'purple'
+  icon: code
+  color: orange

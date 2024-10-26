@@ -11,28 +11,25 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Run Octave action and test command/script
+      - name: Run Octave Unit tests
         uses: ./ # run action.yml from the root of this repo
+        # env:
+        #   WORKDIR: ./test_cases
         with:
-          command: disp('Action is working as expected')
-          
-      - name: Test if the string_to_check works (1/2)
-        uses: ./
-        with:
-          command: disp('SUCCESS this does not match')
-          string_to_check: 'FAILED'
-          
-      - name: Test if the string_to_check works (2/2)
+          test_case: MyTestCases
+
+      - name: Run Failing Octave Unit tests
         id: should-fail
         continue-on-error: true
-        uses: ./
+        uses: ./ # run action.yml from the root of this repo
+        # env:
+        #   WORKDIR: ./test_cases
         with:
-          command: disp('FAILED this does match')
-          string_to_check: 'FAILED'
-      
-      - name: Handle success of 2nd string_to_check
+          test_case: MyFailingTestCases
+
+      - name: Map unwanted success of 2nd unit tests to error
         if: steps.should-fail.outcome == 'success'
         uses: actions/github-script@v3
         with:
           script: |
-            core.setFailed("string_to_check 2/2 should have failed but didn't.")
+            core.setFailed("Failing unit tests should have failed but didn't.")

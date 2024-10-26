@@ -1,5 +1,5 @@
-# Action for Running Octave
-[![Test Action](https://github.com/repos4u/octave-action/actions/workflows/test-actions.yml/badge.svg)](https://github.com/repos4u/octave-action/actions/workflows/test-actions.yml)
+# Action for Running Matlab Unit tests on Octave
+[![Test Action](https://github.com/ttschnz/octave-action/actions/workflows/test-actions.yml/badge.svg)](https://github.com/ttschnz/octave-action/actions/workflows/test-actions.yml)
 
 This action enables to run GNU Octave tests on [GitHub&reg;-hosted](https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners) runners:
 
@@ -8,20 +8,23 @@ This action enables to run GNU Octave tests on [GitHub&reg;-hosted](https://docs
 ## Examples
 To use this action on GitHub-hosted runner, see the following example
 
-### Run Octave Tests on Github-Hosted Runner
+### Run Matlab Unit tests on Github-Hosted Runner using Octave
 
 ```yaml
-name: Run Octave Tests on Github-Hosted Runner
+name: Run Matlab Tests
 on: [push]
 jobs:
   my-job:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
       - name: Run tests
-        uses: repos4u/octave-action@v1
+        uses: ttschnz/octave-action@v1
+        env:
+          WORKDIR: ./path/to/my/matlab/files/
         with:
-          command: disp('Use any octave command here');
-          string_to_check: "FAILED" # optional, default is "Error"
+          test_case: MyTestCases
+
 ```
